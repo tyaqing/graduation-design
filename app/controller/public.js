@@ -18,7 +18,7 @@ class Public extends Controller {
     if ((ctx.session.code = body.code)) {
       ctx.login(user);
     }
-    ctx.body = body;
+    ctx.body = { message: '登陆成功' };
   }
   // 注册
   async register() {
@@ -34,14 +34,24 @@ class Public extends Controller {
   }
   // 退出登录
   async logout() {
-    // const { ctx } = this;
+    const { ctx } = this;
+    ctx.logout();
+    ctx.body = { message: '退出成功' };
   }
   // 发送验证码
   async send_msm() {
     const { ctx } = this;
-    const code = '2222';
+    const body = ctx.request.body;
+    const user = await ctx.model.User.findOne({ where: { tel: body.tel } });
+    if (!user) ctx.throw('用户不存在', 404);
+    const code = parseInt(Math.random() * (9999 - 1000) + 1000);
     ctx.session.code = code;
-    ctx.body = { code };
+    // 发送验证码
+
+    ctx.body = {
+      code,
+      send_result: await ctx.service.msm.send(body.tel, code),
+    };
   }
 }
 

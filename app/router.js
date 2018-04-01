@@ -9,6 +9,7 @@ module.exports = app => {
 
   router.get('/', controller.home.index);
   router.post('/login', controller.public.login);
+  router.get('/logout', controller.public.logout);
   router.post('/register', controller.public.register);
   // 上传位置
   router.post('/location', controller.user.location);

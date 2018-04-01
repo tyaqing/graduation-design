@@ -4,11 +4,13 @@
   "description": "graduation design",
   "private": true,
   "dependencies": {
+    "crypto": "^1.0.1",
     "egg": "^2.2.1",
     "egg-passport": "^2.0.1",
     "egg-passport-local": "^1.2.1",
     "egg-scripts": "^2.5.0",
     "egg-sequelize": "^3.1.2",
+    "moment": "^2.22.0",
     "mysql2": "^1.5.3"
   },
   "devDependencies": {
